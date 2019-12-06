@@ -1,14 +1,6 @@
-# Docker Build, Tag and Push to AWS ECR
+# AWS ECR Login
 
-This action will build, tag and push a Docker image to an AWS ECR repository.
-
-`Docker build` will attempt to build from a Dockerfile located in the root of your repository.
-
-The branch name and commit SHA are added as tags.
-
-By default, the newly built image is pushed to an AWS ECR repository with the same name as your Github repository.
-
-See [Optional Arguments](#optional-arguments) for information on adding additional tags and overriding the AWS ECR repository name.
+This action will simply login to an AWS ECR repository.
 
 ## Usage
 
@@ -50,16 +42,6 @@ jobs:
 
 **Suggestion**: Store your AWS account details in [Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
 
-## Optional Arguments
-
-- `ecr_repository_name`: By default this action will attempt to push the Docker image to an AWS ECR repository named after the Github repository name (minus the repository owner). This argument allows the sepcifying of an alternative AWS ECR repository name.
-- `additional_tags`: A comma separated list of tags to apply to the image, in addition to the default tags. These values will be stripped on whitespace before being applied.
-
-## Outputs
-
-- `old_image_digest`: In the case that a Docker image tagged with the branch name already exists in the AWS ECR repository, this output variable will hold the value of the Docker image digest. If there are no Docker images tagged with the branch name, then this will be empty.
-- `new_image_digest`: This output variable will hold the Docker image digest of the newly built image.
-
 ## Role permissions
 
 This action uses [AWS Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html) to to assume the **AWS_ACCOUNT_ROLE**.
@@ -88,8 +70,3 @@ The following shows an example policy containing the permissions that are requir
   ]
 }
 ```
-
-## Future Enhancements
-
-- Allow the passing of an optional argument to specify the location of the Dockerfile to build.
-- Tag master branch with 'latest' by default.

@@ -63,38 +63,11 @@ assume_role() {
   echo "Successfully assumed role"
 }
 
-# Request ECR credentials and execute returned command to login
-login_to_ecr() {
-  echo "Logging into ECR in region: ${AWS_REGION}"
-  $(aws ecr get-login --no-include-email --region ${AWS_REGION})
-
-  if [ $? -ne 0 ]; then
-    echo "Failed to log into AWS ECR" >&2
-    return 3
-  fi
-
-  echo "Successfully logged into ECR"
-}
-
 check_env_vars || exit $?
 
 # Assume role with permission to login to ECR
 assume_role || exit $?
 
-# Execute inline login to AWS ECR
-login_to_ecr || exit $?
+login=`aws ecr get-login --no-include-email --region ${AWS_REGION}`
 
-# Execute e2e test
-docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPORT_DIR=${GITHUB_WORKSPACE}/report \
-  --rm -v ${GITHUB_WORKSPACE}/report:${GITHUB_WORKSPACE}/report ${INPUT_IMAGE}:${INPUT_ENVIRONMENT} || exit $?
-
-echo "Successfully run tests, setting report as output"
-
-echo `pwd`
-ls -la 
-
-ls .. -la 
-
-cat ${GITHUB_WORKSPACE}/report/${INPUT_ENVIRONMENT}-public.html
-
-echo ::set-output name=report::`cat report/${INPUT_ENVIRONMENT}-public.html`
+echo ::set-output name=login::${login}

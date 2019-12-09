@@ -11,5 +11,5 @@ inputs:
     description: The image which contains the tests and test runner.
     required: true
 outputs:
-  report:
-    description: The report from the tests
+  login:
+    description: The ecr login command

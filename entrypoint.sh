@@ -68,6 +68,6 @@ check_env_vars || exit $?
 # Assume role with permission to login to ECR
 assume_role || exit $?
 
-login=`aws ecr get-login --no-include-email --region ${AWS_REGION}`
+login=$(aws ecr get-login --no-include-email --region ${AWS_REGION})
 
 echo ::set-output name=login::${login}

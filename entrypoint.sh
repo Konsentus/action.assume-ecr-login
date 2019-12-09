@@ -94,4 +94,8 @@ if [ $docker_result -ne 0 ]; then
   exit($docker_result);
 fi
 
+echo "Successfully run tests, setting report as output"
+
+cat report/public-${INPUT_ENVIRONMENT}.html
+
 echo ::set-output name=report::`cat report/public-${INPUT_ENVIRONMENT}.html`

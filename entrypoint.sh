@@ -85,8 +85,8 @@ assume_role || exit $?
 login_to_ecr || exit $?
 
 # Execute e2e test
-docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPORT_DIR=/report \
-  --rm -v ${GITHUB_WORKSPACE}/report:/report ${INPUT_IMAGE}:${INPUT_ENVIRONMENT} || exit $?
+docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPORT_DIR=${GITHUB_WORKSPACE}/report \
+  --rm -v ${GITHUB_WORKSPACE}/report:${GITHUB_WORKSPACE}/report ${INPUT_IMAGE}:${INPUT_ENVIRONMENT} || exit $?
 
 echo "Successfully run tests, setting report as output"
 

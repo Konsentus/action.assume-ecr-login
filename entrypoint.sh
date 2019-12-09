@@ -90,6 +90,9 @@ docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPO
 
 echo "Successfully run tests, setting report as output"
 
+ls -la 
+ls report -la
+
 cat report/public-${INPUT_ENVIRONMENT}.html
 
 echo ::set-output name=report::`cat report/public-${INPUT_ENVIRONMENT}.html`

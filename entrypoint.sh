@@ -95,6 +95,6 @@ ls -la
 
 ls .. -la 
 
-cat report/public-${INPUT_ENVIRONMENT}.html
+cat report/${INPUT_ENVIRONMENT}-public.html
 
-echo ::set-output name=report::`cat report/public-${INPUT_ENVIRONMENT}.html`
+echo ::set-output name=report::`cat report/${INPUT_ENVIRONMENT}-public.html`

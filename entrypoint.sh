@@ -95,6 +95,6 @@ ls -la
 
 ls .. -la 
 
-cat report/${INPUT_ENVIRONMENT}-public.html
+cat ${GITHUB_WORKSPACE}/report/${INPUT_ENVIRONMENT}-public.html
 
 echo ::set-output name=report::`cat report/${INPUT_ENVIRONMENT}-public.html`

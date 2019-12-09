@@ -86,13 +86,7 @@ login_to_ecr || exit $?
 
 # Execute e2e test
 docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPORT_DIR=/report \
-  --rm -v `pwd`/report:/report ${INPUT_IMAGE}:${INPUT_ENVIRONMENT}
-
-docker_result=$?
-if [ $docker_result -ne 0 ]; then
-  echo "Docker returned exit code $docker_result"
-  exit($docker_result);
-fi
+  --rm -v `pwd`/report:/report ${INPUT_IMAGE}:${INPUT_ENVIRONMENT} || exit $?
 
 echo "Successfully run tests, setting report as output"
 

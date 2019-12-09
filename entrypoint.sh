@@ -90,8 +90,10 @@ docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPO
 
 echo "Successfully run tests, setting report as output"
 
+echo `pwd`
 ls -la 
-ls report -la
+
+ls .. -la 
 
 cat report/public-${INPUT_ENVIRONMENT}.html
 

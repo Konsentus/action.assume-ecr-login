@@ -27,6 +27,8 @@ check_env_vars() {
     "AWS_ACCOUNT_ROLE"
     "AWS_ACCOUNT_ID"
     "AWS_REGION"
+    "ENVIRONMENT"
+    "TESTS_IMAGE"
   )
 
   for VARIABLE_NAME in "${requiredVariables[@]}"
@@ -83,3 +85,8 @@ assume_role || exit $?
 
 # Execute inline login to AWS ECR
 login_to_ecr || exit $?
+
+# Execute e2e test
+docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${ENVIRONMENT} -e REPORT_DIR=/report \
+  --rm -v `pwd`/report:/report ${TESTS_IMAGE}:${ENVIRONMENT}
+

@@ -21,13 +21,14 @@ jobs:
       AWS_ACCOUNT_ID: ${{ secrets.ECR_AWS_ACCOUNT_ID }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      ENVIRONMENT: pre-prod
-      TEST_IMAGE: postman/newman
     name: Download and run test runner
     runs-on: ubuntu-latest
     steps:
       - name: Download
         uses: konsentus/action.run-e2e-tests@master
+        with:
+          environment: pre-prod
+          image: postman/newman
 ```
 
 ## Environment Variables
@@ -37,8 +38,11 @@ jobs:
 - `AWS_ACCOUNT_ID`: The account number of the AWS account in which the ECR repository exists.
 - `AWS_ACCESS_KEY_ID`: The AWS Access Key ID of a user with permission to assume the **AWS_ACCOUNT_ROLE**.
 - `AWS_SECRET_ACCESS_KEY`: The AWS Secret Access Key that pairs with the `AWS_ACCESS_KEY_ID`.
-- `ENVIRONMENT` : The environment which the tests are to be run against.
-- `TESTS_IMAGE` : The image which contains the tests and test runner.
+
+## Input Parameters
+
+- `environment` : The environment which the tests are to be run against.
+- `image` : The image which contains the tests and test runner.
 
 **Suggestion**: Store your AWS account details in [Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
 

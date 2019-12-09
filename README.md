@@ -48,7 +48,7 @@ jobs:
 
 ## Role permissions
 
-This action uses [AWS Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html) to to assume the **AWS_ACCOUNT_ROLE**.
+This action uses [AWS Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html) to assume the **AWS_ACCOUNT_ROLE**.
 
 The following shows an example policy containing the permissions that are required for the **AWS_ACCOUNT_ROLE** to perform the AWS commands contained in the action.
 

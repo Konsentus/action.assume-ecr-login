@@ -85,6 +85,6 @@ assume_role || exit $?
 login_to_ecr || exit $?
 
 # Execute e2e test
-docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${environment} -e REPORT_DIR=/report \
-  --rm -v `pwd`/report:/report ${image}:${environment}
+docker run -e COLLECTION_TYPE=public -e ENVIRONMENT=${INPUT_ENVIRONMENT} -e REPORT_DIR=/report \
+  --rm -v `pwd`/report:/report ${INPUT_IMAGE}:${INPUT_ENVIRONMENT}
 

@@ -71,3 +71,4 @@ assume_role || exit $?
 login=$(aws ecr get-login --no-include-email --region ${AWS_REGION})
 
 echo ::set-output name=login::${login}
+echo ::set-output name=AWS_SESSION_TOKEN::${AWS_SESSION_TOKEN}

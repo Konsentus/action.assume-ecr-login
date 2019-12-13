@@ -72,3 +72,5 @@ login=$(aws ecr get-login --no-include-email --region ${AWS_REGION})
 
 echo ::set-output name=login::${login}
 echo ::set-output name=AWS_SESSION_TOKEN::${AWS_SESSION_TOKEN}
+echo ::set-output name=AWS_SECRET_ACCESS_KEY::${AWS_SECRET_ACCESS_KEY}
+echo ::set-output name=AWS_ACCESS_KEY_ID::${AWS_ACCESS_KEY_ID}

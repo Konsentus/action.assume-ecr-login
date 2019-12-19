@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get ECR Login for Assumed Account
-        uses: konsentus/action.assume@master
+        uses: konsentus/action.assume-ecr-login@master
         id: ecr-login
       - name: "Login to AWS ECR"
         run: ${{ steps.ecr-login.outputs.login }}

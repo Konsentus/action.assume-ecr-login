@@ -1,14 +1,11 @@
-# Run e2e Tests
+# Get ECR Login for Assumed Account
 
-This action will login to an AWS ECR repository, pull down a docker image which runs the tests and then
-runs the image.
-
-## Usage
+This action will assume role and return the login to an AWS ECR repository which can be executed and used to access docker images from ECR.
 
 ### Example Pipeline
 
 ```yaml
-name: Run e2e tests
+name: Get ECR Login for Assumed Account
 on:
   push:
     branches:
@@ -21,14 +18,14 @@ jobs:
       AWS_ACCOUNT_ID: ${{ secrets.ECR_AWS_ACCOUNT_ID }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    name: Download and run test runner
+    name: Get ECR Login for Assumed Account
     runs-on: ubuntu-latest
     steps:
-      - name: Download
-        uses: konsentus/action.run-e2e-tests@master
-        with:
-          environment: pre-prod
-          image: postman/newman
+      - name: Get ECR Login for Assumed Account
+        uses: konsentus/action.assume@master
+        id: ecr-login
+      - name: "Login to AWS ECR"
+        run: ${{ steps.ecr-login.outputs.login }}
 ```
 
 ## Environment Variables
@@ -38,13 +35,6 @@ jobs:
 - `AWS_ACCOUNT_ID`: The account number of the AWS account in which the ECR repository exists.
 - `AWS_ACCESS_KEY_ID`: The AWS Access Key ID of a user with permission to assume the **AWS_ACCOUNT_ROLE**.
 - `AWS_SECRET_ACCESS_KEY`: The AWS Secret Access Key that pairs with the `AWS_ACCESS_KEY_ID`.
-
-## Input Parameters
-
-- `environment` : The environment which the tests are to be run against.
-- `image` : The image which contains the tests and test runner.
-
-**Suggestion**: Store your AWS account details in [Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
 
 ## Role permissions
 

@@ -47,7 +47,7 @@ assume_role() {
   credentials=$(aws sts assume-role --role-arn "arn:aws:iam::${AWS_ACCOUNT_ID}:role/${AWS_ACCOUNT_ROLE}" --role-session-name docker-build-and-push --output json)
 
   if [ $? -ne 0 ]; then
-    echo "Failed to assume role ${AWS_ACCOUNT_ROLE} in account: ${AWS_ACCOUNT_ID}" >&2
+    echo "Failed to assume role [${AWS_ACCOUNT_ROLE}] in account: [${AWS_ACCOUNT_ID}]" >&2
     return 3
   fi
 

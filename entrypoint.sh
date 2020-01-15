@@ -74,3 +74,7 @@ echo ::set-output name=login::${login}
 echo ::set-output name=AWS_SESSION_TOKEN::${AWS_SESSION_TOKEN}
 echo ::set-output name=AWS_SECRET_ACCESS_KEY::${AWS_SECRET_ACCESS_KEY}
 echo ::set-output name=AWS_ACCESS_KEY_ID::${AWS_ACCESS_KEY_ID}
+
+echo ::add-mask::${AWS_SESSION_TOKEN}
+echo ::add-mask::${AWS_SECRET_ACCESS_KEY}
+echo ::add-mask::${AWS_ACCESS_KEY_ID}

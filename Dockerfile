@@ -1,10 +1,8 @@
-FROM docker:latest
+FROM docker:19
 
 ADD entrypoint.sh /entrypoint.sh
 
-RUN apk add --no-cache bash \
-  && apk add --no-cache python3 \
-  && pip3 install awscli \
-  && apk add --no-cache jq
+RUN apk add --no-cache bash jq python3 py3-pip \
+  && pip3 install awscli
 
 ENTRYPOINT ["/entrypoint.sh"]
